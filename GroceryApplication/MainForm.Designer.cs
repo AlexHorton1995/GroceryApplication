@@ -35,7 +35,7 @@
             this.ItemPrice = new System.Windows.Forms.TextBox();
             this.ItemName = new System.Windows.Forms.TextBox();
             this.ItemQuantity = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.Taxable = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -50,7 +50,9 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.TaxableItems = new System.Windows.Forms.Label();
+            this.Subtotal = new System.Windows.Forms.Label();
+            this.TotalItems = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -66,7 +68,7 @@
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.checkBox1);
+            this.panel1.Controls.Add(this.Taxable);
             this.panel1.Controls.Add(this.ItemQuantity);
             this.panel1.Controls.Add(this.ItemName);
             this.panel1.Controls.Add(this.ItemPrice);
@@ -96,7 +98,9 @@
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.label7);
+            this.panel4.Controls.Add(this.TaxableItems);
+            this.panel4.Controls.Add(this.Subtotal);
+            this.panel4.Controls.Add(this.TotalItems);
             this.panel4.Controls.Add(this.label6);
             this.panel4.Controls.Add(this.label5);
             this.panel4.Controls.Add(this.label4);
@@ -132,16 +136,16 @@
             this.ItemQuantity.Size = new System.Drawing.Size(61, 35);
             this.ItemQuantity.TabIndex = 2;
             // 
-            // checkBox1
+            // Taxable
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox1.Location = new System.Drawing.Point(171, 141);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(178, 33);
-            this.checkBox1.TabIndex = 3;
-            this.checkBox1.Text = "Taxable Item";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.Taxable.AutoSize = true;
+            this.Taxable.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Taxable.Location = new System.Drawing.Point(171, 141);
+            this.Taxable.Name = "Taxable";
+            this.Taxable.Size = new System.Drawing.Size(178, 33);
+            this.Taxable.TabIndex = 3;
+            this.Taxable.Text = "Taxable Item";
+            this.Taxable.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -182,6 +186,7 @@
             this.AddItem.TabIndex = 7;
             this.AddItem.Text = "Add";
             this.AddItem.UseVisualStyleBackColor = true;
+            this.AddItem.Click += new System.EventHandler(this.AddItem_Click);
             // 
             // RemoveItem
             // 
@@ -192,6 +197,7 @@
             this.RemoveItem.TabIndex = 8;
             this.RemoveItem.Text = "Remove";
             this.RemoveItem.UseVisualStyleBackColor = true;
+            this.RemoveItem.Click += new System.EventHandler(this.RemoveItem_Click);
             // 
             // UpdateItem
             // 
@@ -202,6 +208,7 @@
             this.UpdateItem.TabIndex = 9;
             this.UpdateItem.Text = "Update";
             this.UpdateItem.UseVisualStyleBackColor = true;
+            this.UpdateItem.Click += new System.EventHandler(this.UpdateItem_Click);
             // 
             // LoadList
             // 
@@ -212,6 +219,7 @@
             this.LoadList.TabIndex = 10;
             this.LoadList.Text = "Load";
             this.LoadList.UseVisualStyleBackColor = true;
+            this.LoadList.Click += new System.EventHandler(this.LoadList_Click);
             // 
             // SaveList
             // 
@@ -222,6 +230,7 @@
             this.SaveList.TabIndex = 11;
             this.SaveList.Text = "Save";
             this.SaveList.UseVisualStyleBackColor = true;
+            this.SaveList.Click += new System.EventHandler(this.SaveList_Click);
             // 
             // ShareList
             // 
@@ -232,6 +241,7 @@
             this.ShareList.TabIndex = 12;
             this.ShareList.Text = "Share";
             this.ShareList.UseVisualStyleBackColor = true;
+            this.ShareList.Click += new System.EventHandler(this.ShareList_Click);
             // 
             // CloseForm
             // 
@@ -242,6 +252,7 @@
             this.CloseForm.TabIndex = 13;
             this.CloseForm.Text = "Close";
             this.CloseForm.UseVisualStyleBackColor = true;
+            this.CloseForm.Click += new System.EventHandler(this.CloseForm_Click);
             // 
             // dataGridView1
             // 
@@ -256,54 +267,78 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(35, 12);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(175, 47);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(136, 29);
+            this.label4.Size = new System.Drawing.Size(162, 32);
             this.label4.TabIndex = 10;
-            this.label4.Text = "Item Name:";
+            this.label4.Text = "Total Items:";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(35, 41);
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(208, 111);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(136, 29);
+            this.label5.Size = new System.Drawing.Size(129, 32);
             this.label5.TabIndex = 11;
-            this.label5.Text = "Item Name:";
+            this.label5.Text = "Subtotal:";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(35, 70);
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(137, 79);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(136, 29);
+            this.label6.Size = new System.Drawing.Size(200, 32);
             this.label6.TabIndex = 12;
-            this.label6.Text = "Item Name:";
+            this.label6.Text = "Taxable Items:";
             // 
-            // label7
+            // TaxableItems
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(35, 99);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(136, 29);
-            this.label7.TabIndex = 13;
-            this.label7.Text = "Item Name:";
+            this.TaxableItems.AutoSize = true;
+            this.TaxableItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TaxableItems.Location = new System.Drawing.Point(343, 79);
+            this.TaxableItems.Name = "TaxableItems";
+            this.TaxableItems.Size = new System.Drawing.Size(31, 32);
+            this.TaxableItems.TabIndex = 15;
+            this.TaxableItems.Text = "0";
+            // 
+            // Subtotal
+            // 
+            this.Subtotal.AutoSize = true;
+            this.Subtotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Subtotal.Location = new System.Drawing.Point(343, 111);
+            this.Subtotal.Name = "Subtotal";
+            this.Subtotal.Size = new System.Drawing.Size(87, 32);
+            this.Subtotal.TabIndex = 14;
+            this.Subtotal.Text = "$0.00";
+            // 
+            // TotalItems
+            // 
+            this.TotalItems.AutoSize = true;
+            this.TotalItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TotalItems.Location = new System.Drawing.Point(343, 47);
+            this.TotalItems.Name = "TotalItems";
+            this.TotalItems.Size = new System.Drawing.Size(31, 32);
+            this.TotalItems.TabIndex = 13;
+            this.TotalItems.Text = "0";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1058, 570);
+            this.ClientSize = new System.Drawing.Size(1093, 613);
+            this.ControlBox = false;
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "Grocery Store List";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -321,7 +356,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox Taxable;
         private System.Windows.Forms.TextBox ItemQuantity;
         private System.Windows.Forms.TextBox ItemName;
         private System.Windows.Forms.TextBox ItemPrice;
@@ -336,10 +371,12 @@
         private System.Windows.Forms.Button SaveList;
         private System.Windows.Forms.Button LoadList;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label TaxableItems;
+        private System.Windows.Forms.Label Subtotal;
+        private System.Windows.Forms.Label TotalItems;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
     }
 }
 
