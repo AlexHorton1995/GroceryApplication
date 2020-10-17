@@ -1,6 +1,6 @@
-﻿namespace GroceryApplication
+﻿namespace UnitTestProject1.MockClasses
 {
-    partial class MainForm
+    partial class MockMainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -382,4 +382,3 @@
         private System.Windows.Forms.Label label5;
     }
 }
-

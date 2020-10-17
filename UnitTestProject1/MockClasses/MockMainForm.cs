@@ -1,30 +1,35 @@
 ﻿using GroceryApplication.DAO;
 using GroceryApplication.Models;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
-using System.Runtime.CompilerServices;
+using System.Drawing;
+using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
-[assembly: InternalsVisibleTo("UnitTestProject1")]
-namespace GroceryApplication
+namespace UnitTestProject1.MockClasses
 {
-    public partial class MainForm : Form
+    public partial class MockMainForm : Form
     {
-        public static IAppDao Dao;
+        public static IMockAppDao Dao;
         public static DataTable ItemData;
         public ListModel model;
 
         #region Constructors
 
-        public MainForm()
+        public MockMainForm()
         {
             InitializeComponent();
         }
 
-        static MainForm()
+        static MockMainForm()
         {
-            Dao = new AppDao();
+            
+            Dao = new MockDao();
             ItemData = Dao.CreateDataTable();
         }
 
@@ -185,11 +190,6 @@ namespace GroceryApplication
             }
             return retVal;
         }
-
-
-
-
         #endregion
-
     }
 }

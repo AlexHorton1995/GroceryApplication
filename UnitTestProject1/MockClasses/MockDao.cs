@@ -1,17 +1,15 @@
-﻿using GroceryApplication.Models;
+﻿using GroceryApplication.DAO;
+using GroceryApplication.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
-[assembly: InternalsVisibleTo("UnitTestProject1")]
-namespace GroceryApplication.DAO
+namespace UnitTestProject1.MockClasses
 {
-    public interface IAppDao
+    public interface IMockAppDao
     {
         DataTable CreateDataTable();
         bool AddRecord(DataTable dt, ListModel model);
@@ -20,11 +18,11 @@ namespace GroceryApplication.DAO
         void DeleteAllRecords();
     }
 
-    public class AppDao : IAppDao
+    public class MockDao : IMockAppDao
     {
         public DataTable CreateDataTable()
         {
-            DataTable dataTable = new DataTable("Items");
+            DataTable dataTable = new DataTable("MockItems");
             dataTable.Columns.Add("ItemName", typeof(string));
             dataTable.Columns.Add("ItemPrice", typeof(decimal));
             dataTable.Columns.Add("ItemQuantity", typeof(short));
@@ -75,6 +73,7 @@ namespace GroceryApplication.DAO
         {
 
         }
+
 
     }
 }
