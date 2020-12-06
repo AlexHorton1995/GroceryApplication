@@ -15,8 +15,8 @@ namespace GroceryApplication.DAO
     {
         DataTable CreateDataTable();
         bool AddRecord(DataTable dt, ListModel model);
-        void UpdateRecord();
-        void DeleteRecord(DataTable dt, string value);
+        void UpdateRecord(DataTable dt, ListModel model, int row);
+        void DeleteRecord(DataTable dt, int row);
         void DeleteAllRecords();
     }
 
@@ -52,23 +52,25 @@ namespace GroceryApplication.DAO
             }
         }
 
-        public void UpdateRecord()
+        public void UpdateRecord(DataTable dt, ListModel model, int row)
         {
+            //1. identify column that needs changing
+            //2. change the column by updating the cell
+            //3. commit changes to the datatable.
+            //4. update the view with the new data (totals, quantity, etc)
+
+            dt.Rows[row]["ItemName"] = model.ItemName;
+            dt.Rows[row]["ItemPrice"] = model.ItemPrice;
+            dt.Rows[row]["ItemQuantity"] = model.ItemQuantity;
+            dt.Rows[row]["Taxable"] = model.Taxable ? "T" : string.Empty;
+            dt.AcceptChanges();
 
         }
 
-        public void DeleteRecord(DataTable dt, string value)
+        public void DeleteRecord(DataTable dt, int row)
         {
-            for (int i = dt.Rows.Count - 1; i >= 0; i--)
-            {
-                var dr = dt.Rows[i];
-
-                if (dr["ItemName"].ToString() == value.ToString())
-                {
-                    dr.Delete();
-                    dt.AcceptChanges();
-                }
-            }
+            dt.Rows[row].Delete();
+            dt.AcceptChanges();
         }
 
         public void DeleteAllRecords()

@@ -49,7 +49,9 @@ namespace GroceryApplication
         private void UpdateItem_Click(object sender, EventArgs e)
         {
             //TODO - at the end of all the code above
-            Dao.UpdateRecord();
+
+            UpdateTableItem();
+            //Dao.UpdateRecord();
         }
 
         private void LoadList_Click(object sender, EventArgs e)
@@ -165,18 +167,17 @@ namespace GroceryApplication
 
             try
             {
-                foreach (DataRow row in ItemData.Rows)
-                {
-                    var itemName = row["ItemName"].ToString();
-                    var deleteDecision = MessageBox.Show($"Would you like to remove item {itemName}?",
-                         "Delete Item?",
-                         MessageBoxButtons.YesNo);
+                var sel = dataGridView1.CurrentCell.RowIndex;
 
-                    if (deleteDecision.ToString() == "Yes")
-                    {
-                        Dao.DeleteRecord(ItemData, itemName);
-                        return retVal;
-                    }
+                var itemName = ItemData.Rows[sel]["ItemName"].ToString();
+                var deleteDecision = MessageBox.Show($"Would you like to remove item {itemName}?",
+                     "Delete Item?",
+                     MessageBoxButtons.YesNo);
+
+                if (deleteDecision.ToString() == "Yes")
+                {
+                    Dao.DeleteRecord(ItemData, sel);
+                    return retVal;
                 }
             }
             catch (Exception)
@@ -186,7 +187,55 @@ namespace GroceryApplication
             return retVal;
         }
 
+        internal bool UpdateTableItem()
+        {
+            bool retVal = true;
 
+            try
+            {
+                //1. identify column that needs changing
+                var sel = dataGridView1.CurrentCell.RowIndex;
+
+                //2. change the column by updating the cell
+                ListModel model = new ListModel()
+                {
+                    ItemName = ItemData.Rows[sel]["ItemName"].ToString(),
+                    ItemPrice = Convert.ToDecimal(ItemData.Rows[sel]["ItemPrice"].ToString()),
+                    ItemQuantity = Convert.ToInt16(ItemData.Rows[sel]["ItemQuantity"].ToString()),
+                    Taxable = ItemData.Rows[sel]["Taxable"].ToString().Equals("T")
+                };
+
+                using (var formPopup = new UpdateItems(model))
+                {
+                    formPopup.ShowDialog();
+                    model = formPopup.UpdateRowData();
+                    Dao.UpdateRecord(ItemData, model, sel);
+                }
+
+
+                //3. commit changes to the datatable.
+                //4. update the view with the new data (totals, quantity, etc)
+
+                //foreach (DataRow row in ItemData.Rows)
+                //{
+                //    var itemName = row["ItemName"].ToString();
+                //    var deleteDecision = MessageBox.Show($"Would you like to remove item {itemName}?",
+                //         "Delete Item?",
+                //         MessageBoxButtons.YesNo);
+
+                //    if (deleteDecision.ToString() == "Yes")
+                //    {
+                //        Dao.DeleteRecord(ItemData, itemName);
+                //        return retVal;
+                //    }
+                //}
+            }
+            catch (Exception)
+            {
+                retVal = false;
+            }
+            return retVal;
+        }
 
 
         #endregion

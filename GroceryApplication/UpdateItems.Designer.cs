@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.UpdateItem = new System.Windows.Forms.Button();
-            this.RemoveItem = new System.Windows.Forms.Button();
-            this.AddItem = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -45,32 +43,13 @@
             // UpdateItem
             // 
             this.UpdateItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UpdateItem.Location = new System.Drawing.Point(258, 181);
+            this.UpdateItem.Location = new System.Drawing.Point(8, 181);
             this.UpdateItem.Name = "UpdateItem";
-            this.UpdateItem.Size = new System.Drawing.Size(120, 62);
+            this.UpdateItem.Size = new System.Drawing.Size(370, 62);
             this.UpdateItem.TabIndex = 19;
             this.UpdateItem.Text = "Update";
             this.UpdateItem.UseVisualStyleBackColor = true;
-            // 
-            // RemoveItem
-            // 
-            this.RemoveItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RemoveItem.Location = new System.Drawing.Point(132, 181);
-            this.RemoveItem.Name = "RemoveItem";
-            this.RemoveItem.Size = new System.Drawing.Size(120, 62);
-            this.RemoveItem.TabIndex = 18;
-            this.RemoveItem.Text = "Remove";
-            this.RemoveItem.UseVisualStyleBackColor = true;
-            // 
-            // AddItem
-            // 
-            this.AddItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddItem.Location = new System.Drawing.Point(6, 181);
-            this.AddItem.Name = "AddItem";
-            this.AddItem.Size = new System.Drawing.Size(120, 62);
-            this.AddItem.TabIndex = 17;
-            this.AddItem.Text = "Add";
-            this.AddItem.UseVisualStyleBackColor = true;
+            this.UpdateItem.Click += new System.EventHandler(this.UpdateItem_Click);
             // 
             // label3
             // 
@@ -145,9 +124,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.UpdateItem);
             this.panel1.Controls.Add(this.ItemPrice);
-            this.panel1.Controls.Add(this.RemoveItem);
             this.panel1.Controls.Add(this.ItemName);
-            this.panel1.Controls.Add(this.AddItem);
             this.panel1.Controls.Add(this.ItemQuantity);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.Taxable);
@@ -174,8 +151,6 @@
         #endregion
 
         private System.Windows.Forms.Button UpdateItem;
-        private System.Windows.Forms.Button RemoveItem;
-        private System.Windows.Forms.Button AddItem;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
